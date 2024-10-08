@@ -42,11 +42,10 @@ button.innerHTML = '<span aria-hidden="true">FLASH SALE</span>';
 // Style để đặt button góc phải phía dưới cách 100px
 button.style.position = 'fixed';
 button.style.right = '10px';
-button.style.bottom = '100px';
+button.style.bottom = '200px';
 button.style.zIndex = '9999'; // Đảm bảo nút luôn ở trên các phần tử khác
 button.style.borderRadius = '10px'; // Bo góc 10px
 button.style.padding = '10px 20px'; // Thêm padding để nhìn button đẹp hơn
-button.style.color = 'white'; // Màu chữ trắng (tuỳ chọn)
 button.style.border = 'none'; // Xoá đường viền mặc định (tuỳ chọn)
 
 // Chèn button vào body của trang
