@@ -30,8 +30,7 @@ function request(config, result, error) {
 }
 
 
-document.querySelector('.sort-by-options__option-group').insertAdjacentHTML('beforeend',`<button aria-label="" aria-pressed="true" class="sort-by-options__option sort-by-options__option--selected"><span aria-hidden="true">FALSH SALE</span></button>`)
-
+setTimeout(() => document.querySelector('.sort-by-options__option-group').insertAdjacentHTML('beforeend',`<button aria-label="" aria-pressed="true" class="sort-by-options__option sort-by-options__option--selected"><span aria-hidden="true">FALSH SALE</span></button>`), 3000);
 
 function flash_sale() {
     let shopString = document.querySelector('.shop-search-result-view__item') ? '.shop-search-result-view__item ' : '';
