@@ -30,26 +30,7 @@ function request(config, result, error) {
 }
 
 
-// Tạo nút button
-const button = document.createElement('button');
-
-// Thêm thuộc tính cho button
-button.setAttribute('aria-label', '');
-button.setAttribute('aria-pressed', 'true');
-button.className = 'sort-by-options__option sort-by-options__option--selected';
-button.innerHTML = '<span aria-hidden="true">FLASH SALE</span>';
-
-// Style để đặt button góc phải phía dưới cách 100px
-button.style.position = 'fixed';
-button.style.right = '10px';
-button.style.bottom = '200px';
-button.style.zIndex = '9999'; // Đảm bảo nút luôn ở trên các phần tử khác
-button.style.borderRadius = '10px'; // Bo góc 10px
-button.style.padding = '10px 20px'; // Thêm padding để nhìn button đẹp hơn
-button.style.border = 'none'; // Xoá đường viền mặc định (tuỳ chọn)
-
-// Chèn button vào body của trang
-document.body.appendChild(button);
+document.querySelector('.sort-by-options__option-group').insertAdjacentHTML('beforeend',`<button aria-label="" aria-pressed="true" class="sort-by-options__option sort-by-options__option--selected"><span aria-hidden="true">FALSH SALE</span></button>`)
 
 
 function flash_sale() {
