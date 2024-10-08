@@ -32,6 +32,31 @@ function request(config, result, error) {
 
 setTimeout(() => document.querySelector('.sort-by-options__option-group').insertAdjacentHTML('beforeend', `<button onclick="flash_sale()" aria-label="" aria-pressed="true" class="sort-by-options__option sort-by-options__option--selected"><span aria-hidden="true">FALSH SALE</span></button>`), 5000);
 
+
+// Tạo nút button
+const button = document.createElement('button');
+
+// Thêm thuộc tính cho button
+button.setAttribute('aria-label', '');
+button.setAttribute('aria-pressed', 'true');
+button.className = 'sort-by-options__option sort-by-options__option--selected';
+button.innerHTML = '<span onclick="flash_sale()" aria-hidden="true">FLASH SALE</span>';
+
+// Style để đặt button góc phải phía dưới cách 100px và thêm bo góc
+button.style.position = 'fixed';
+button.style.right = '10px';
+button.style.bottom = '200px';
+button.style.zIndex = '9999'; // Đảm bảo nút luôn ở trên các phần tử khác
+button.style.borderRadius = '10px'; // Bo góc 10px
+button.style.padding = '10px 20px'; // Thêm padding để nhìn button đẹp hơn
+button.style.border = 'none'; // Xoá đường viền mặc định (tuỳ chọn)
+
+// Chèn button vào body của trang
+document.body.appendChild(button);
+
+
+
+
 function flash_sale() {
     const shopId = new URL(document.querySelector('.contents').href).pathname.match(/i\.(\d+)\.(\d+)/)[1];
 
@@ -40,25 +65,32 @@ function flash_sale() {
     }, (s) => {
         console.log(s);
         const result = document.querySelector('.shop-search-result-view');
+        result.scrollIntoView();
         result.innerHTML = '';
         let stringdata = '';
-        s.data.flash_sales.forEach(element => {
-            const date = new Date(timestamp * 1000);
-            const options = {
-                hour: '2-digit',
-                minute: '2-digit',
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            };
-            const formattedDate = date.toLocaleString('vi-VN',
-                options);
+        if (s.data.flash_sales != undefined) {
+            s.data.flash_sales.forEach(element => {
+                const date = new Date(element.start_time * 1000);
+                const options = {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric'
+                };
+                const formattedDate = date.toLocaleString('vi-VN',
+                    options);
+    
+                stringdata += `<br>-----Bắt đầu lúc ${formattedDate}-----<br>`;
+                element.items.forEach(item => {
+                    stringdata += `https://shopee.vn/product/${item.shop_id}/${item.item_id}<br>`;
+                })
+            });
 
-            stringdata += `<br>-----Bắt đầu lúc ${formattedDate}-----<br>`;
-            element.items.forEach(item => {
-                stringdata += `https://shopee.vn/product/${item.shop_id}/${item.item_id}<br>`;
-            })
-        });
+        } else {
+            stringdata += `----- KHÔNG CÓ CHƯƠNG TRÌNH FLASH SALE ------`
+        }
+
 
         result.innerHTML = stringdata;
     }, (e) => {})
