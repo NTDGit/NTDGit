@@ -28,3 +28,35 @@ function request(config, result, error) {
             error(err);
         });
 }
+
+
+// Tạo nút button
+const button = document.createElement('button');
+
+// Thêm thuộc tính cho button
+button.setAttribute('aria-label', '');
+button.setAttribute('aria-pressed', 'true');
+button.className = 'sort-by-options__option sort-by-options__option--selected';
+button.innerHTML = '<span aria-hidden="true">FLASH SALE</span>';
+
+// Style để đặt button góc phải phía dưới cách 100px
+button.style.position = 'fixed';
+button.style.right = '10px';
+button.style.bottom = '100px';
+button.style.zIndex = '9999'; // Đảm bảo nút luôn ở trên các phần tử khác
+button.style.borderRadius = '10px'; // Bo góc 10px
+button.style.padding = '10px 20px'; // Thêm padding để nhìn button đẹp hơn
+button.style.color = 'white'; // Màu chữ trắng (tuỳ chọn)
+button.style.border = 'none'; // Xoá đường viền mặc định (tuỳ chọn)
+
+// Chèn button vào body của trang
+document.body.appendChild(button);
+
+
+function flash_sale() {
+    let shopString = document.querySelector('.shop-search-result-view__item') ? '.shop-search-result-view__item ' : '';
+    let links = Array.from(document.querySelectorAll(`${shopString}a.contents`));
+    const url = new URL(links[0].href);
+    const match = url.pathname.match(/i\.(\d+)\.(\d+)/);
+    const shopId = match[1]; 
+}
